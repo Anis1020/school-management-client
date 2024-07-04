@@ -6,6 +6,8 @@ import SignIn from "../Form/SignIn/SignIn";
 import SignUp from "../Form/SignUp/SignUp";
 import AdmissionForm from "../Form/AdmissionForm/AdmissionForm";
 import EventForm from "../Form/EventForm/EventForm";
+import AllStaff from "../pages/AllStaff/AllStaff";
+import ClassRoom from "../pages/ClassRoom/ClassRoom";
 
 export const router = createBrowserRouter([
   {
@@ -16,6 +18,14 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+      },
+      {
+        path: "/teachers",
+        element: <AllStaff></AllStaff>,
+      },
+      {
+        path: "/classRoom",
+        element: <ClassRoom></ClassRoom>,
       },
       {
         path: "/signIn",

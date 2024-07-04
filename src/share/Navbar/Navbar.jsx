@@ -13,6 +13,9 @@ const Navbar = () => {
         <NavLink to={"/teachers"}>All Staff</NavLink>
       </li>
       <li>
+        <NavLink to={"/classRoom"}>Class Room</NavLink>
+      </li>
+      <li>
         <NavLink to={"/aboutSchool"}>About School</NavLink>
       </li>
       <li>
