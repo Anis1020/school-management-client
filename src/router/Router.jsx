@@ -5,6 +5,7 @@ import ErrorPage from "../share/ErrorPage/ErrorPage";
 import SignIn from "../Form/SignIn/SignIn";
 import SignUp from "../Form/SignUp/SignUp";
 import AdmissionForm from "../Form/AdmissionForm/AdmissionForm";
+import EventForm from "../Form/EventForm/EventForm";
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
       {
         path: "/admission",
         element: <AdmissionForm></AdmissionForm>,
+      },
+      {
+        path: "/event",
+        element: <EventForm></EventForm>,
       },
     ],
   },

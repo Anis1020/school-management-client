@@ -18,6 +18,9 @@ const Navbar = () => {
       <li>
         <NavLink to={"/admission"}>Admission</NavLink>
       </li>
+      <li>
+        <NavLink to={"/event"}>Event</NavLink>
+      </li>
     </>
   );
   return (
