@@ -1,16 +1,18 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import useAuth from "../../CustomHook/useAuth";
 
 const Navbar = () => {
+  const { user } = useAuth();
   const navLink = (
     <>
       <li>
-        <a>Home</a>
+        <NavLink to={"/"}>Home</NavLink>
       </li>
       <li>
-        <a>Teachers</a>
+        <NavLink to={"/teachers"}>Teachers</NavLink>
       </li>
       <li>
-        <a>About School</a>
+        <NavLink to={"/aboutSchool"}>About School</NavLink>
       </li>
     </>
   );
@@ -48,10 +50,17 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{navLink}</ul>
         </div>
         <div className="navbar-end">
-          <div>
-            <Link className="btn">Log Out</Link>
-          </div>
-          <Link className="btn">LogIn</Link>
+          {user ? (
+            <div>
+              <Link to={"/signIn"} className="btn">
+                Log Out
+              </Link>
+            </div>
+          ) : (
+            <Link to={"/signIn"} className="btn">
+              LogIn
+            </Link>
+          )}
         </div>
       </div>
     </>
