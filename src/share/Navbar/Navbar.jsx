@@ -1,5 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../CustomHook/useAuth";
+import placeholder from "../../assets/placeholder.jpg";
 
 const Navbar = () => {
   const { user } = useAuth();
@@ -13,6 +14,9 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink to={"/aboutSchool"}>About School</NavLink>
+      </li>
+      <li>
+        <NavLink to={"/admission"}>Admission</NavLink>
       </li>
     </>
   );
@@ -50,11 +54,16 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{navLink}</ul>
         </div>
         <div className="navbar-end">
-          {user ? (
-            <div>
+          {!user ? (
+            <div className="flex">
               <Link to={"/signIn"} className="btn">
                 Log Out
               </Link>
+              <img
+                src={placeholder}
+                className="w-10 h-10 rounded-full"
+                alt=""
+              />
             </div>
           ) : (
             <Link to={"/signIn"} className="btn">
