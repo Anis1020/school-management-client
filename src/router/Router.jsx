@@ -8,6 +8,7 @@ import AdmissionForm from "../Form/AdmissionForm/AdmissionForm";
 import EventForm from "../Form/EventForm/EventForm";
 import AllStaff from "../pages/AllStaff/AllStaff";
 import ClassRoom from "../pages/ClassRoom/ClassRoom";
+import AboutSchool from "../pages/AboutSchool/AboutSchool";
 
 export const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ export const router = createBrowserRouter([
       {
         path: "/teachers",
         element: <AllStaff></AllStaff>,
+      },
+      {
+        path: "/aboutSchool",
+        element: <AboutSchool></AboutSchool>,
       },
       {
         path: "/classRoom",
