@@ -1,9 +1,12 @@
 import { Link, NavLink } from "react-router-dom";
-import useAuth from "../../CustomHook/useAuth";
 import placeholder from "../../assets/placeholder.jpg";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebaseConfig/FirebaseConfig";
+import { useDispatch } from "react-redux";
+import { logOut } from "../../redux/features/users/userSlice";
 
 const Navbar = () => {
-  const { user } = useAuth();
+  const dispatch = useDispatch();
   const navLink = (
     <>
       <li>
@@ -26,6 +29,11 @@ const Navbar = () => {
       </li>
     </>
   );
+
+  const handleLogOut = () => {
+    signOut(auth);
+    dispatch(logOut());
+  };
   return (
     <>
       <div className="navbar bg-base-100">
@@ -60,22 +68,16 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{navLink}</ul>
         </div>
         <div className="navbar-end">
-          {!user ? (
-            <div className="flex">
-              <Link to={"/signIn"} className="btn">
-                Log Out
-              </Link>
-              <img
-                src={placeholder}
-                className="w-10 h-10 rounded-full"
-                alt=""
-              />
-            </div>
-          ) : (
-            <Link to={"/signIn"} className="btn">
-              LogIn
+          <div className="flex">
+            <Link onClick={handleLogOut} to={"/signIn"} className="btn">
+              Log Out
             </Link>
-          )}
+            <img src={placeholder} className="w-10 h-10 rounded-full" alt="" />
+          </div>
+
+          <Link to={"/signIn"} className="btn">
+            LogIn
+          </Link>
         </div>
       </div>
     </>

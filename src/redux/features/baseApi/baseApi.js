@@ -4,6 +4,7 @@ const baseApi = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://jsonplaceholder.typicode.com",
+    // baseUrl: "http://localhost:5000",
   }),
   endpoints: (builder) => ({
     getPost: builder.query({
@@ -24,9 +25,20 @@ const baseApi = createApi({
         body: post,
       }),
     }),
+    updateData: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/posts/${id}`,
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const { useGetPostQuery, useGetPostByIdQuery, useSetPostMutation } =
-  baseApi;
+export const {
+  useGetPostQuery,
+  useGetPostByIdQuery,
+  useSetPostMutation,
+  useUpdateDataMutation,
+} = baseApi;
 export default baseApi;

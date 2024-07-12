@@ -1,8 +1,39 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { FcGoogle } from "react-icons/fc";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { createUser } from "../../redux/features/users/userSlice";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
 
 const SignUp = () => {
+  const navigate = useNavigate();
+  const { isLoading, isError, error, email } = useSelector(
+    (state) => state.userSlice
+  );
+  const dispatch = useDispatch();
+  const { register, handleSubmit } = useForm();
+  useEffect(() => {
+    if (isError && error) {
+      toast.error(error);
+    }
+  }, [isError, error]);
+  useEffect(() => {
+    if (!isLoading && email) {
+      navigate("/");
+    }
+  }, [isLoading, email]);
+  const onSubmit = ({ name, email, password }) => {
+    dispatch(
+      createUser({
+        email,
+        password,
+        name,
+      })
+    );
+    console.log(name, email, password);
+  };
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
@@ -11,6 +42,7 @@ const SignUp = () => {
           <p className="text-sm text-gray-400">Welcome to AirCNC</p>
         </div>
         <form
+          onSubmit={handleSubmit(onSubmit)}
           noValidate=""
           action=""
           className="space-y-6 ng-untouched ng-pristine ng-valid"
@@ -27,6 +59,7 @@ const SignUp = () => {
                 placeholder="Enter Your Name Here"
                 className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900"
                 data-temp-mail-org="0"
+                {...register("name")}
               />
             </div>
             <div>
@@ -39,6 +72,7 @@ const SignUp = () => {
                 id="image"
                 name="image"
                 accept="image/*"
+                {...register("image")}
               />
             </div>
             <div>
@@ -53,6 +87,7 @@ const SignUp = () => {
                 placeholder="Enter Your Email Here"
                 className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900"
                 data-temp-mail-org="0"
+                {...register("email")}
               />
             </div>
             <div>
@@ -68,6 +103,7 @@ const SignUp = () => {
                 required
                 placeholder="*******"
                 className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900"
+                {...register("password")}
               />
             </div>
           </div>
